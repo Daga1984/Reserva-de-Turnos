@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestor de Turnos - Peluquería</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+    }
+    .turnos, .mis-turnos {
+      margin-top: 20px;
+    }
+    .turno {
+      padding: 10px;
+      margin: 5px 0;
+      background: #fff;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    input[type="text"] {
+      padding: 5px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+      max-width: 300px;
+    }
+    #nombre-cliente-label {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Reserva tu turno</h1>
+
+  <label id="nombre-cliente-label" for="nombreCliente">Nombre del cliente:</label>
+  <input type="text" id="nombreCliente" placeholder="Escribe tu nombre">
+
+  <div class="turnos">
+    <h2>Turnos disponibles</h2>
+    <div id="turnos-disponibles"></div>
+  </div>
+
+  <div class="mis-turnos">
+    <h2>Mis turnos reservados</h2>
+    <div id="mis-turnos"></div>
+  </div>
+
+  <script>
+    const turnosDisponibles = [
+      "10:00", "10:30", "11:00", "11:30", "12:00",
+      "13:00", "13:30", "14:00", "14:30", "15:00",
+      "16:00", "16:30", "17:00", "17:30"
+    ];
+
+    const reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+
+    function renderTurnos() {
+      const disponiblesDiv = document.getElementById("turnos-disponibles");
+      const reservadosDiv = document.getElementById("mis-turnos");
+      disponiblesDiv.innerHTML = "";
+      reservadosDiv.innerHTML = "";
+
+      turnosDisponibles.forEach(turno => {
+        const yaReservado = reservas.find(r => r.hora === turno);
+        if (!yaReservado) {
+          const div = document.createElement("div");
+          div.className = "turno";
+          div.innerHTML = `${turno} <button onclick="reservar('${turno}')">Reservar</button>`;
+          disponiblesDiv.appendChild(div);
+        }
+      });
+
+      reservas.forEach(r => {
+        const div = document.createElement("div");
+        div.className = "turno";
+        div.innerHTML = `${r.hora} - ${r.nombre} <button onclick="cancelar('${r.hora}')">Cancelar</button>`;
+        reservadosDiv.appendChild(div);
+      });
+    }
+
+    function reservar(turno) {
+      const nombre = document.getElementById("nombreCliente").value.trim();
+      if (!nombre) {
+        alert("Por favor ingresa tu nombre antes de reservar.");
+        return;
+      }
+
+      reservas.push({ hora: turno, nombre });
+      localStorage.setItem("reservas", JSON.stringify(reservas));
+      renderTurnos();
+    }
+
+    function cancelar(turno) {
+      const index = reservas.findIndex(r => r.hora === turno);
+      if (index !== -1) reservas.splice(index, 1);
+      localStorage.setItem("reservas", JSON.stringify(reservas));
+      renderTurnos();
+    }
+
+    renderTurnos();
+  </script>
+</body>
+</html>
