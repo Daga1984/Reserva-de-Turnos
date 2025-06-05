@@ -1,22 +1,22 @@
 Gestor de turnos - Salon de belleza
 
-es una proyecto web simple para dar solucion a un problema de turnos en un salon de belleza este fue desarrollado en **JavaScript puro (vanilla JS)** que permite a los usuarios **reservar y cancelar turnos** en un salon de belleza.
+Es una proyecto web simple para dar solucion a un problema de turnos en un salon de belleza este fue desarrollado en **JavaScript puro (vanilla JS)** que permite a los usuarios **reservar y cancelar turnos** en un salon de belleza.
 
 Este sistema almacena los datos localmente en el navegador utilizando `localStorage`, por lo que no necesita base de datos ni servidor. Ideal como MVP (Producto Mínimo Viable) para una presentación facil y demostrativa y de forma rapida
 
 ---
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
-- 🕒 Lista de turnos disponibles.
-- 🧍‍♂️ Ingreso del nombre del cliente.
-- ✅ Reserva de turnos.
-- ❌ Cancelación de turnos reservados.
-- 💾 Persistencia de reservas con `localStorage`.
+-  Lista de turnos disponibles.
+-  Ingreso del nombre del cliente.
+- Reserva de turnos.
+- Cancelación de turnos reservados.
+- Persistencia de reservas con `localStorage`.
 
 ---
 
-## 🧑‍💻 Tecnologías usadas
+## Tecnologías usadas
 
 - HTML5
 - CSS3
@@ -24,7 +24,7 @@ Este sistema almacena los datos localmente en el navegador utilizando `localStor
 
 ---
 
-## 🗂 Estructura del proyecto
+## Estructura del proyecto
 
 ```bash
 📁 Reserva-de-Turnos/
